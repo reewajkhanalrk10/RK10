@@ -1,33 +1,1383 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>RK10</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>RK10</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/webpagekologo.svg" rel="icon">
+  <link href="assets/img/webpagekologo.svg" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <!-- Font Awesome CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li class="mode-toggle">
-                    <button id="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <h1><a href="index.html">Reewaj Khanal</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+      <h2>I’m a <span>student</span> from Palpa, driven by passion and purpose</h2>
+
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link active" href="#header">Home</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#resume">Resume</a></li>
+          <li><a class="nav-link" href="#services">Services</a></li>
+          <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+
+      <div class="social-links">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/reewajkhanal.rk10" class="social-icon facebook" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      
+        <!-- GitHub -->
+        <a href="https://github.com/reewajkhanalrk10" class="social-icon github" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/reewajkhanal.rk10" class="social-icon instagram" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/reewajkhanal" class="social-icon linkedin" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      
+        <!-- Mail -->
+        <a href="mailto:rk26071320@student.ku.edu.np" class="social-icon mail" aria-label="Mail">
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+        <!-- Snapchat -->
+        <a href="https://www.snapchat.com/add/reewajrk10" class="social-icon snapchat" aria-label="Snapchat">
+          <i class="fab fa-snapchat-ghost"></i>
+        </a>
+      
+        <!-- SoundCloud -->
+        <a href="https://soundcloud.com/reewajkhanalrk10" class="social-icon soundcloud" aria-label="SoundCloud">
+          <i class="fab fa-soundcloud"></i>
+        </a>
+      
+        <!-- Telegram -->
+        <a href="https://t.me/reewajrk10" class="social-icon telegram" aria-label="Telegram">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+
+        <!-- Tiktok -->
+        <a href="https://www.tiktok.com/@reewajkhanal.rk10" class="social-icon tiktok" aria-label="Tiktok">
+          <i class="fab fa-tiktok"></i>
+        </a>   
+
+        <!-- Twitter (Old logo) -->
+        <a href="https://x.com/reewajrk10" class="social-icon twitter" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      
+        <!-- Web -->
+        <a href="https://reewajkhanal.com.np" class="social-icon web" aria-label="Website">
+          <i class="fas fa-globe"></i>
+        </a>
+      
+        <!-- WhatsApp -->
+        <a href="https://wa.me/+9779869922510" class="social-icon youtube" aria-label="YouTube">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@reewajkhanalrk10" class="social-icon youtube" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>      
+      
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+
+    <!-- ======= About Me ======= -->
+    <div class="about-me container">
+
+      <div class="section-title">
+        <h2>About</h2>
+        <p>Wanna Know Me?</p>
+      </div>
+
+      <style>
+        body {
+          background: #121212;
+          color: #e0e0e0;
+          font-family: "Poppins", sans-serif;
+        }
+      
+        .about-section {
+          background: #1a1a1a;
+          padding: 50px;
+          border-radius: 12px;
+          box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+          display: flex;
+          align-items: center;
+        }
+      
+        .profile-img {
+          border-radius: 12px;
+          width: 100%;
+          max-width: 280px;
+          display: block;
+          box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
+        }
+      
+        .about-content {
+          padding: 20px 40px;
+          background: #1e1e1e;
+          border-radius: 12px;
+          box-shadow: 0px 4px 12px rgba(0, 255, 255, 0.2);
+          width: 100%;
+        }
+      
+        .about-content h3 {
+          font-size: 24px;
+          font-weight: 700;
+          color: #00ffff;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+      
+        .about-content p {
+          font-size: 16px;
+          color: #b0b0b0;
+          line-height: 1.6;
+          text-align: justify;
+          margin-bottom: 20px;
+        }
+      
+        .about-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+      
+        .about-list li {
+          padding: 10px 0;
+          font-size: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+      
+        .about-list i {
+          color: #00ffff;
+          font-size: 18px;
+          margin-right: 8px;
+        }
+      
+        .about-list strong {
+          color: #ffffff;
+          min-width: 140px;
+          text-align: left;
+        }
+      
+        .about-list span {
+          font-weight: 500;
+          color: #ffffff;
+          text-align: right;
+          flex: 1;
+        }
+      
+        a {
+          color: #00ffff;
+          text-decoration: none;
+          transition: 0.3s;
+        }
+      
+        a:hover {
+          color: #ff00ff;
+        }
+      </style>
+      
+      <div class="container">
+        <div class="row about-section">
+          <div class="col-lg-4 d-flex justify-content-center align-items-center text-center profile-container" data-aos="fade-right">
+            <div class="profile-img-wrapper">
+              <div class="image-container">
+                <img src="assets/img/11.jpg" class="profile-img" alt="Reewaj Khanal">
+                <img src="assets/img/me.jpg" class="profile-img" alt="Reewaj Khanal">
+                <img src="assets/img/22.jpg" class="profile-img" alt="Reewaj Khanal">
+              </div>
+            </div>
+          </div>
+          
+        
+          <div class="col-lg-8 about-content" data-aos="fade-left">
+            <h3>Student | Designer | Developer | Researcher</h3>
+            <p>
+              Reewaj Khanal is a designer, developer, and researcher with expertise in full-stack development, proficient in both front-end and back-end technologies. With a strong passion for multimedia, he seamlessly integrates creativity with technical proficiency. His keen interest in business, finance, technology, robotics, and IoT drives an innovative approach to solving complex problems. Dedicated to bridging the gap between technology and real-world applications, Reewaj strives to deliver impactful and efficient digital solutions.
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="about-list">
+                  <li><i class="bi bi-calendar-event"></i> <strong>Birthday:</strong> <span>2059.10.27 BS | 2003.02.10 AD</span></li>
+                  <li><i class="bi bi-globe"></i> <strong>Website:</strong> <span><a href="https://www.reewajkhanal.com.np" target="_blank">reewajkhanal.com.np</a></span></li>
+                  <li><i class="bi bi-telephone"></i> <strong>Phone:</strong> <span>+977 - 986 9922 510</span></li>
+                  <li><i class="bi bi-geo-alt"></i> <strong>Location:</strong> <span>Tansen Municipality - 06, Palpa, Nepal</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="about-list">
+                  <li><i class="bi bi-hourglass-split"></i> <strong>Age:</strong> <span id="age"></span></li>
+
+<script>
+function calculateAge(birthDate) {
+    const birth = new Date(birthDate);
+    const today = new Date();
     
-    <main>
-        <section>
-            <h1>Welcome to My Portfolio</h1>
-            <p>This is the homepage of my portfolio website.</p>
-        </section>
-    </main>
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
+
+    if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    return `${years} years, ${months} months, ${days} days`;
+}
+
+document.getElementById("age").innerText = calculateAge("2003-02-10");
+</script>
+
+                  <li><i class="bi bi-award"></i> <strong>Degree:</strong> <span>Undergraduate</span></li>
+                  <li><i class="bi bi-envelope"></i> <strong>Email:</strong> <span>reewajkhanal.rk10@gmail.com, rk26071320@student.ku.edu.np</span></li>
+                  <li><i class="bi bi-briefcase"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                </ul>
+              </div>
+            </div> <br>
+            <p>
+              In a world driven by innovation, I believe in the power of technology to transform ideas into reality. With a commitment to excellence and a vision for the future, I continue to explore, create, and contribute to meaningful advancements.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      </div>
+
+    </div><!-- End About Me -->
+
+    <!-- ======= Counts ======= -->
+    <div class="skills container">
+      <div class="section-title">
+          <h2>Skills</h2>
+      </div>
+  
+      <div class="row">
+          <!-- Left Column -->
+          <div class="col-lg-6 col-md-6">
+              <div class="progress">
+                  <span class="skill">HTML <i class="val">90%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 90%; background: linear-gradient(to right, #4caf50, #81c784);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">CSS <i class="val">90%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 90%; background: linear-gradient(to right, #2196f3, #64b5f6);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">JavaScript <i class="val">75%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 75%; background: linear-gradient(to right, #ff9800, #ffb74d);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Python <i class="val">80%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 80%; background: linear-gradient(to right, #9c27b0, #ba68c8);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">React <i class="val">70%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 70%; background: linear-gradient(to right, #61dafb, #b3e5fc);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">SQL <i class="val">70%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 70%; background: linear-gradient(to right, #ff5722, #ff7043);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">NoSQL <i class="val">75%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 75%; background: linear-gradient(to right, #ff5722, #ff7043);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Adobe Suite (Photoshop, Illustrator, InDesign)<i class="val">95%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 95%; background: linear-gradient(to right, #c2185b, #f06292);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Node.js<i class="val">35%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 35%; background: linear-gradient(to right, #ffa000, #ffca28);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Networking & DevOps<i class="val">55%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 55%; background: linear-gradient(to right, #607d8b, #90a4ae);"></div>
+                  </div>
+              </div>
+          </div>
+  
+          <!-- Right Column -->
+          <div class="col-lg-6 col-md-6">
+              <div class="progress">
+                  <span class="skill">Java <i class="val">30%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 30%; background: linear-gradient(to right, #f44336, #e57373);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Kotlin <i class="val">20%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 20%; background: linear-gradient(to right, #009688, #80cbc4);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">MATLAB <i class="val">70%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 70%; background: linear-gradient(to right, #607d8b, #90a4ae);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">GraphQL <i class="val">55%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 55%; background: linear-gradient(to right, #e91e63, #f06292);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Blender <i class="val">75%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 75%; background: linear-gradient(to right, #0d47a1, #1976d2);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Figma <i class="val">95%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 95%; background: linear-gradient(to right, #3f51b5, #7986cb);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Firmware Development<i class="val">60%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 60%; background: linear-gradient(to right, #009688, #80cbc4);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Video Editing (Premiere, After Effects, Filmora)<i class="val">80%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 80%; background: linear-gradient(to right, #607d8b, #90a4ae);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Circuit Simulation (Proteus, TinkerCAD)<i class="val">85%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 85%; background: linear-gradient(to right, #607d8b, #90a4ae);"></div>
+                  </div>
+              </div>
+  
+              <div class="progress">
+                  <span class="skill">Embedded Systems (Arduino, ESP32)<i class="val">55%</i></span>
+                  <div class="progress-bar-wrap">
+                      <div class="progress-bar" style="width: 55%; background: linear-gradient(to right, #ffa000, #ffca28);"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
     
-    <footer>
-        <p>&copy; 2023 Reewaj Khanal. All rights reserved.</p>
-    </footer>
+<!-- End Skills -->
+
+    <!-- ======= Interests ======= -->
+
+    <div class="interests container">
+      <div class="section-title">
+        <h2>Interests</h2>
+      </div>
+    
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <div class="icon-box">
+            <i class="fas fa-paint-brush" style="color: #b2904f;"></i>
+            <h3>Graphics Designing</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+          <div class="icon-box">
+            <!-- Use 'fa-mars' for a Mars-related icon -->
+            <i class="fas fa-mars" style="color: #e55b5b; font-size: 40px;"></i>
+            <h3>Astro Physics</h3>
+          </div>          
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+          <div class="icon-box">
+            <i class="fas fa-bicycle" style="color: #e80368;"></i>
+            <h3>Bike Riding</h3> 
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+          <div class="icon-box">
+            <i class="fas fa-laptop-code" style="color: #4233ff;"></i>
+            <h3>Programming</h3> 
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-car" style="color: #e361ff;"></i>
+            <h3>Driving</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-headphones" style="color: #ffbb2c;"></i>
+            <h3>Music</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-futbol" style="color: #29cc61;"></i>
+            <h3>Football</h3> 
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-camera" style="color: #47aeff;"></i>
+            <h3>Photography</h3> 
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-video" style="color: #ffa76e;"></i>
+            <h3>Videography</h3> 
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-map-marker-alt" style="color: #5578ff;"></i>
+            <h3>Travelling</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-hiking" style="color: #11dbcf;"></i>
+            <h3>Trekking</h3> 
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="icon-box">
+            <i class="fas fa-swimmer" style="color: #ff5828;"></i>
+            <h3>Swimming</h3> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- End Interests -->
+
+    <!-- ======= Testimonials ======= -->
+    <div class="testimonials container">
+
+      <div class="section-title">
+        <h2>Testimonials</h2>
+      </div>
+
+      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  The dedication, collaboration and feverent enthusiasm shown by Reewaj Khanal during our research was critical for it's success.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+              <div class="testimonial-profile">
+                <img src="assets/img/testimonials/abiral.jpg" class="testimonial-img" alt="Abiral Adhikari">
+                <div class="testimonial-info">
+                  <h3>Abiral Adhikari</h3>
+                  <h4>Researcher &amp; Developer</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                There are only a handful of friends who have amazed me with their skills and professionalism, and Reewaj is undoubtedly one of them. I wholeheartedly endorse him for any opportunity that may come his way.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="assets/img/testimonials/felix.jpg" class="testimonial-img" alt="">
+              <h3>Roshan Sahani aka. Felix Hud</h3>
+              <h4>Microsoft Learn Student Ambassador Gold Ambassador</h4>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Friendly, Helpful and Talented Deep learning Expert and Designer. It was such an experience to work with him in a project.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="assets/img/testimonials/wagle.jpg" class="testimonial-img" alt="">
+              <h3>Samir Wagle</h3>
+              <h4>Impact Nexus Nepal - INN, CTO</h4>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                He can vibe with any problem, tackling it with honesty, curiosity, and a warm, supportive spirit.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="assets/img/testimonials/arun.jpg" class="testimonial-img" alt="">
+              <h3>Arun Bhandari</h3>
+              <h4>Java & PHP Developer</h4></div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Reewaj is truly exceptional. His ability to think outside the box and create innovative solutions is remarkable. He brings a fresh perspective to every project, always considering how to find a better solution. Reewaj's passion for his work and his positivity is inspiring! 
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img src="assets/img/testimonials/samik.jpg" class="testimonial-img" alt="">
+              <h3>Samikshya Upadhyay</h3>
+              <h4>UniCollab, CEO</h4>
+            </div>
+          </div><!-- End testimonial item -->
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <div class="owl-carousel testimonials-carousel">
+
+      </div>
+
+    </div><!-- End Testimonials  -->
+
+  </section><!-- End About Section -->
+
+  <!-- ======= Resume Section ======= -->
+  <section id="resume" class="resume">
+    <div class="container">
+        
+        <div class="section-title">
+            <h2>Resume</h2>
+            <p>Check My Resume</p>
+        </div>
+
+        <div class="row">
+
+            <!-- Left Column: Education & Professional Experience -->
+            <div class="col-lg-6">
+                <h3 class="resume-title">Education</h3>
+
+                <div class="resume-item">
+                    <h4>Primary Schooling</h4>
+                    <h5>April 2005 – April 2010</h5>
+                    <p><em>Prashanti Children’s Academy, Tansen-06, Palpa</em></p>
+                </div>
+
+                <div class="resume-item">
+                    <h4>High Schooling</h4>
+                    <h5>April 2010 – December 2020</h5>
+                    <p><em>New Horizon Awasiya Secondary School, Tansen-07, Palpa</em></p>
+                    <ul>
+                        <li>District Level Examination (DLE): 86.125%</li>
+                        <li>Secondary Education Examination (SEE): GPA 3.70</li>
+                        <li>School Leaving Certificate (Grade XI & XII): CGPA 3.36</li>
+                    </ul>
+                </div>
+
+                <div class="resume-item">
+                    <h4>Bachelor of Engineering in Computer Engineering</h4>
+                    <h5>Feb 2021 - Aug 2025 (Expected Graduation)</h5>
+                    <p><em>Kathmandu University, Dhulikhel, Kavre</em></p>
+                </div>
+
+                <h3 class="resume-title">Professional Experience</h3>
+
+<div class="resume-item">
+    <h4>Global Virtual Intern</h4>
+    <h5>March 2023</h5>
+    <p><em>IIDE (Indian Institute of Digital Education), Remote</em></p>
+    <ul>
+        <li>Completed the 1-Month Global Virtual Internship Programme under the leadership of <strong>Shreya Ravaria</strong>.</li>
+        <li>Gained hands-on experience in <strong>Social Media Marketing, SEO, Content Writing, and Google Sheet Management</strong>.</li>
+        <li>Applied <strong>integrated marketing solutions</strong> and enhanced practical exposure to core <strong>Digital Marketing</strong> concepts.</li>
+        <li>Maintained <strong>professionalism</strong> and delivered <strong>satisfactory performance</strong> throughout the internship.</li>
+        <li>Demonstrated <strong>optimism, passion, and creativity</strong>, contributing effectively to assigned projects.</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Undergraduate Research Intern</h4>
+    <h5>Aug 2023 - Feb 2025</h5>
+    <p><em>Information and Language Processing Research Lab (ILPRL), School of Engineering, Kathmandu University</em></p>
+    <ul>
+        <li>Conducting research under the supervision of faculty at <strong>ILPRL Lab</strong>, focusing on computational linguistics and AI-driven solutions.</li>
+        <li>Developed profanity and offensiveness detection models using <strong>GRU, CNN, and RNN</strong> for English-language YouTube videos.</li>
+        <li>Extended research to Nepali-language datasets, leveraging <strong>Bi-LSTM models</strong>, culminating in a research paper published at <strong>ICON 2024</strong>.</li>
+        <li>Contributing to Google’s <strong>Society-Centered AI Research Program</strong> by developing a <strong>Trilingual Machine Translation System (English-Nepali-Tamang)</strong>.</li>
+        <li>Actively working on <strong>language inclusivity</strong> and <strong>machine translation</strong> to bridge communication gaps for underrepresented languages.</li>
+        <li>Demonstrated exceptional <strong>research capabilities, problem-solving skills, and teamwork</strong> in cutting-edge NLP and AI projects.</li>
+    </ul>
+</div>
+
+<h3 class="resume-title">Honors and Awards</h3>
+
+<!-- Honors & Awards Section -->
+
+<div class="resume-item">
+  <h4>Cloud Computing Track Winner</h4>
+  <h5>HackFest 2023, Kathmandu University</h5>
+  <ul>
+      <li>Recognized as the <strong>Cloud Computing Track Winner</strong> at HackFest 2023.</li>
+      <li>Demonstrated expertise in <strong>cloud-based solutions and scalability</strong>.</li>
+      <li>Honored with the <strong>Major League Hacking (MLH) Domain Expert Award</strong> for technical excellence.</li>
+  </ul>
+</div>
+
+<div class="resume-item">
+  <h4>Open Innovation Track Winner</h4>
+  <h5>HackFest 2024, Kathmandu University</h5>
+  <ul>
+      <li>Secured the <strong>Open Innovation Track Winner</strong> title at HackFest 2024.</li>
+      <li>Recognized for a <strong>breakthrough idea in open-source development</strong>.</li>
+  </ul>
+</div>
+
+<div class="resume-item">
+  <h4>Idea Pitching - II<sup>nd</sup> RunnerUp</h4>
+  <h5>HackFest 2024, IT Meet 2024</h5>
+  <ul>
+      <li>Achieved <strong>II<sup>nd</sup> Runner-Up</strong> position in the Idea Pitching Competition.</li>
+      <li>Presented a high-impact solution, demonstrating <strong>innovation and feasibility</strong>.</li>
+  </ul>
+</div>
+
+
+</div>
+
+<!-- Right Column: Clubs & Activities -->
+<div class="col-lg-6">
+
+  <h3 class="resume-title">Research & Publications</h3>
+
+<div class="resume-item">
+    <h4>Profanity and Offensiveness Detection in Nepali Language Using Bi-directional LSTM Model</h4>
+    <h5>2024</h5>
+    <p><em>Published at ICON 2024</em></p>
+    <ul>
+        <li>Developed a <strong>Bi-directional LSTM</strong> model for detecting profanity and offensiveness in the Nepali language.</li>
+        <li>Enhanced <strong>natural language processing (NLP)</strong> capabilities for underrepresented South Asian languages.</li>
+        <li>Presented findings at the <strong>21st International Conference on Natural Language Processing (ICON 2024)</strong>.</li>
+        <li>Full paper available: <a href="https://aclanthology.org/2024.icon-1.60.pdf" target="_blank">Read here</a>.</li>
+    </ul>
+</div>
+
+
+  
+<h3 class="resume-title">Professional Engagements & Extracurricular Involvements</h3>
+
+<div class="resume-item">
+    <h4>Kathmandu University Boys Hostel (KUBH)</h4>
+    <h5>2024 - 2025</h5>
+    <p><em>Hostel Prefect, Student Welfare Directorate</em></p>
+    <ul>
+        <li>Facilitated communication between residents, Junior Prefects, the Student Welfare Directorate, and university departments.</li>
+        <li>Organized and coordinated hostel events in collaboration with the Student Welfare Directorate to enhance student engagement.</li>
+        <li>Oversaw facility inspections, ensuring cleanliness and maintenance with the Physical Facilities department.</li>
+        <li>Assisted in Linux (Microtek) server management and IT-related concerns, supporting Internet Prefects.</li>
+        <li>Provided resident support, including counselor interviews and room allocations.</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Music Informatics Community - MIC</h4>
+    <h5>2024 - Present</h5>
+    <p><em>Community Coordinator</em></p>
+    <ul>
+        <li>Conducted Audio Workshops 001</li>
+        <li>Collaborated with Utsaha “Uniq Poet” Joshi on Nepalese Instrument Audio Data Segregation & Open Source Data Warehousing</li>
+        <li>Worked on AI Generative Music</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>TEDx Kathmandu University 2024</h4>
+    <h5>2024</h5>
+    <p><em>Organizer</em></p>
+    <ul>
+        <li>Coordinated and organized TEDx Kathmandu University 2024.</li>
+        <li>Assisted in event planning, speaker management, and networking facilitation.</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Kathmandu University Computer Club - KUCC</h4>
+    <h5>2023 - 2024</h5>
+    <p><em>Executive Board Member</em></p>
+    <ul>
+        <li>Organized KU HackFest ‘23</li>
+        <li>Organized IT Meet ‘23</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Kathmandu University Literature Academy - KULA</h4>
+    <h5>2023</h5>
+    <p><em>Representative - School of Engineering</em></p>
+    <ul>
+        <li>Organized Khulla Kitab Jatra - 2080</li>
+        <li>Conducted various open mic poetry sessions</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Green Club of Thoughts - GCT</h4>
+    <h5>2022 - 2023</h5>
+    <p><em>Representative - School of Engineering</em></p>
+    <ul>
+        <li>Organized various awareness programs</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Geomatics Engineering Society (GES), Kathmandu University</h4>
+    <h5>2022</h5>
+    <p><em>Joint Secretary</em></p>
+    <ul>
+        <li>Served as Joint Secretary, supporting administrative and organizational activities.</li>
+        <li>Resigned due to an inter-departmental transfer.</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Amnesty International Kathmandu University Youth Network</h4>
+    <h5>2021 - 2022</h5>
+    <p><em>General Member</em></p>
+</div>
+
+<div class="resume-item">
+    <h4>Leo Club of Kathmandu University - Kavre</h4>
+    <h5>2021 - 2022</h5>
+    <p><em>General Member</em></p>
+    <ul>
+        <li>Volunteered in "Leadership and Motivation: A Journey of Self-Development"</li>
+        <li>Received Member Growth Awards</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>ROTRACT Club of Kathmandu University</h4>
+    <h5>2021 - 2022</h5>
+    <p><em>General Member</em></p>
+    <ul>
+        <li>Participated in Anaikot Hiking</li>
+        <li>Attended Flutter Workshop</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Nepalese Student’s Club Palpa Section</h4>
+    <h5>2017 - 2018</h5>
+    <p><em>Founding Secretary</em></p>
+</div>
+
+<div class="resume-item">
+    <h4>Sagarmatha Baal Munch</h4>
+    <h5>2016 - 2018</h5>
+    <p><em>General Secretary</em></p>
+    <ul>
+        <li>Organized Municipal Level Dance Competition</li>
+        <li>Technical Lead and Organizer at Ward Level Digital Quiz</li>
+        <li>Led Volunteering Programs at Laharepipal Primary School</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>Nepal Scouts of New Horizon</h4>
+    <h5>2016 - 2018</h5>
+    <p><em>B.P. Batch & Vice Troop Leader</em></p>
+    <ul>
+        <li>Technical Lead at New Horizon Running Shield District Level Digital Quiz</li>
+        <li>Organized Treasure Hunt and Participated in Hiking & Scout Drill</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>New Horizon English and Literature Circle</h4>
+    <h5>2016 - 2017</h5>
+    <p><em>Founding Vice President</em></p>
+    <ul>
+        <li>Conducted Intra-School Speech, Debate, and Writing Competitions</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>New Horizon Students Quality Circle [SQC] - The United Fanatic</h4>
+    <h5>2015 - 2017</h5>
+    <p><em>Executive Member</em></p>
+    <ul>
+        <li>Conducted SQC 3rd Palpa Hub Convention ‘16</li>
+        <li>Demonstrated District Level & National Level Presentations</li>
+        <li>Participated in Canvas Painting, Web Designing Competition</li>
+        <li>Second Position in District Level Football Competition</li>
+        <li>Participated in 11th & 12th National Convention of SQC</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>INTERACT Club of New Horizon</h4>
+    <h5>2015 - 2017</h5>
+    <p><em>Vice President - 2015/16 & Treasurer - 2016/17</em></p>
+    <ul>
+        <li>Organized School Level Quiz Program</li>
+        <li>Conducted Various Awareness Sessions on Demophobia, Mental Awareness, and Social Growth</li>
+        <li>Led Plantation Program on Environment Day</li>
+    </ul>
+</div>
+
+<div class="resume-item">
+    <h4>New Horizon Science and Technology Club</h4>
+    <h5>Nov, 2015 - 2018</h5>
+    <p><em>Founding Member and President</em></p>
+    <ul>
+        <li>Conducted Science and Technology Exhibitions</li>
+        <li>Organized IQ Race and technical events</li>
+    </ul>
+</div>
+</section>
+
+  </section><!-- End Resume Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="icon-box">
+                <div class="icon"><i class="bx bx-palette"></i></div> <!-- Changed to a design-related icon -->
+                <h4><a href="">Designing</a></h4>
+                <p>Creating intuitive UI/UX designs and user-centric interfaces for web and mobile applications, ensuring seamless user experience and accessibility.</p>
+            </div>
+        </div>
+    
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+                <div class="icon"><i class="bx bx-code-alt"></i></div> <!-- Changed to a coding-related icon -->
+                <h4><a href="">Developing</a></h4>
+                <p>Full-stack development of web and software applications with a strong focus on scalable architecture, performance optimization, and security best practices.</p>
+            </div>
+        </div>
+    
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="icon-box">
+                <div class="icon"><i class="bx bx-chip"></i></div> <!-- Changed to a robotics-related icon -->
+                <h4><a href="">Robotics & IoT</a></h4>
+                <p>Designing and implementing intelligent automation systems, integrating IoT-enabled devices for smart solutions in various industries.</p>
+            </div>
+        </div>
+    
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+                <div class="icon"><i class="bx bx-music"></i></div> <!-- Changed to a music-related icon -->
+                <h4><a href="">Audio Programming</a></h4>
+                <p>Developing cutting-edge solutions in music informatics, digital signal processing (DSP), and interactive audio applications for various platforms.</p>
+            </div>
+        </div>
+    
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+                <div class="icon"><i class="bx bx-credit-card"></i></div> <!-- Changed to a fintech-related icon -->
+                <h4><a href="">FinTech</a></h4>
+                <p>Building financial technology solutions focused on digital banking, blockchain, microfinance, and financial literacy for improved financial inclusion.</p>
+            </div>
+        </div>
+    
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+                <div class="icon"><i class="bx bx-brain"></i></div> <!-- Changed to an AI research-related icon -->
+                <h4><a href="">Research & Development</a></h4>
+                <p>Conducting research in AI, NLP, and machine learning, contributing to innovative projects in computational linguistics and society-centered AI solutions.</p>
+            </div>
+        </div>
+    </div>
+    
+
+    </div>
+  </section><!-- End Services Section -->
+
+  <!-- ======= Portfolio Section ======= -->
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+      <div class="section-title">
+        <h2>Portfolio</h2>
+        <p>My Works</p>
+      </div>
+    
+      <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-web">WEB</li>
+            <li data-filter=".filter-app">APP</li>
+            <li data-filter=".filter-game">GAME</li>
+            <li data-filter=".filter-audio">AUDIO</li>
+            <li data-filter=".filter-iot-es">IoT & ES</li>
+            <li data-filter=".filter-firmware">FIRMWARE</li>
+            <li data-filter=".filter-fintech">FINTECH</li>
+            <li data-filter=".filter-rd">R&D</li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="row portfolio-container">
+    
+        <!-- Content Management System (CMS) -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/cms3.jpg" class="portfolio-image" alt="Portfolio Image">
+            <div class="portfolio-info">
+              <h4>Content Management System (CMS)</h4>
+              <p>Web</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/cms3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Content Management System (CMS)"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Be-Rojgaar: A Job Portal -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/roj4.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Be-Rojgaar: A Job Portal</h4>
+              <p>Web</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/roj4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Be-Rojgaar: A Job Portal"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Respire: Mental Health Support System -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web filter-app filter-iot-es">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/resp.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Respire: Mental Health Support System</h4>
+              <p>Web, App, IoT & ES</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/resp.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Respire: Mental Health Support System"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Mental Compass: AI-powered Mental Health Monitoring App -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app filter-audio filter-iot-es">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/mc.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Mental Compass: AI-powered Mental Health Monitoring App</h4>
+              <p>App, Audio, IoT & ES</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/mc.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Mental Compass: AI-powered Mental Health Monitoring App"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- GunSlinger - A FPS Game in Kathmandu University -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-game">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/gs4.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>GunSlinger - A FPS Game in Kathmandu University</h4>
+              <p>Game</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/gs4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="GunSlinger: The Wild West Adventure Game"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- AI Generative Music -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-audio">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/genai.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>AI Generative Music</h4>
+              <p>Audio</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/genai.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="AI Generative Music"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Nepalese Musical Instrument DataWarehousing -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-audio">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/uniq.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Nepalese Musical Instrument DataWarehousing</h4>
+              <p>Audio</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/uniq.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nepalese Musical Instrument DataWarehousing"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Heart Rate Monitoring System -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-iot-es">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/sudhansir.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Heart Rate Monitoring System</h4>
+              <p>IoT & ES</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/sudhansir.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Heart Rate Monitoring System"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- 21-bit NPR Computer Architecture -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-iot-es">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/npr21.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>21-bit NPR Computer Architecture</h4>
+              <p>IoT & ES</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/npr21.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="21-bit NPR Computer Architecture"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Smart Plant Watering System -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-iot-es filter-firmware">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/mrr.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Smart Plant Watering System</h4>
+              <p>IoT & ES, Firmware</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/mrr.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Smart Plant Watering System"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Nepse Market Analysis Tool -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-fintech">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/nepse.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Nepse Market Analysis Tool</h4>
+              <p>Fintech</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/nepse.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nepse Market Analysis Tool"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- NepSense - Profanity and Offensiveness Detection Using Bi-LSTM -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-rd">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/nepsense.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>NepSense - Profanity and Offensiveness Detection Using Bi-LSTM</h4>
+              <p>R&D</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/nepsense.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="NepSense - Profanity and Offensiveness Detection Using Bi-LSTM"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- COVID-19 Data Analysis of Jhapa and Terathum Districts -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-rd">
+          <div class="portfolio-wrap">
+            <img src="assets/img/portfolio/ge2.jpg" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>COVID-19 Data Analysis of Jhapa and Terathum Districts</h4>
+              <p>R&D</p>
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/ge2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="COVID-19 Data Analysis of Jhapa and Terathum Districts"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+    
+  </section><!-- End Portfolio Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Contact Me</p>
+      </div>
+
+      <div class="row mt-2">
+
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-map"></i>
+            <h3>My Address</h3>
+            <p>KUBH, Dulikhel - 04, Kavrepalanchowk, Bagmati, Nepal</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-share-alt"></i>
+            <h3>Social Profiles</h3> <br>
+            
+            <div class="social-links">
+              <!-- Facebook -->
+              <a href="https://www.facebook.com/reewajkhanal.rk10" class="social-icon facebook" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            
+              <!-- GitHub -->
+              <a href="https://github.com/reewajkhanalrk10" class="social-icon github" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/reewajkhanal.rk10" class="social-icon instagram" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/reewajkhanal" class="social-icon linkedin" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            
+              <!-- Mail -->
+              <a href="mailto:rk26071320@student.ku.edu.np" class="social-icon mail" aria-label="Mail">
+                <i class="fas fa-envelope"></i>
+              </a>
+            
+              <!-- Snapchat -->
+              <a href="https://www.snapchat.com/add/reewajrk10" class="social-icon snapchat" aria-label="Snapchat">
+                <i class="fab fa-snapchat-ghost"></i>
+              </a>
+            
+              <!-- SoundCloud -->
+              <a href="https://soundcloud.com/reewajkhanalrk10" class="social-icon soundcloud" aria-label="SoundCloud">
+                <i class="fab fa-soundcloud"></i>
+              </a>
+            
+              <!-- Telegram -->
+              <a href="https://t.me/reewajrk10" class="social-icon telegram" aria-label="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+      
+              <!-- Tiktok -->
+              <a href="https://www.tiktok.com/@reewajkhanal.rk10" class="social-icon tiktok" aria-label="Tiktok">
+                <i class="fab fa-tiktok"></i>
+              </a>   
+      
+              <!-- Twitter (Old logo) -->
+              <a href="https://x.com/reewajrk10" class="social-icon twitter" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+            
+              <!-- Web -->
+              <a href="https://reewajkhanal.com.np" class="social-icon web" aria-label="Website">
+                <i class="fas fa-globe"></i>
+              </a>
+            
+              <!-- WhatsApp -->
+              <a href="https://wa.me/+9779869922510" class="social-icon youtube" aria-label="YouTube">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+      
+              <!-- YouTube -->
+              <a href="https://www.youtube.com/@reewajkhanalrk10" class="social-icon youtube" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>      
+            
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-envelope"></i>
+            <h3>Email Me</h3>
+            <p>rk26071320@student.ku.edu.np</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bx-phone-call"></i>
+            <h3>Call Me</h3>
+            <p>+977 986 9922 510</p>
+          </div>
+        </div>
+      </div>
+
+      <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+          </div>
+          <div class="col-md-6 form-group mt-3 mt-md-0">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+        </div>
+        <div class="form-group mt-3">
+          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+        </div>
+        <div class="my-3">
+          <div class="loading">Loading</div>
+          <div class="error-message"></div>
+          <div class="sent-message">Your message has been sent. Thank you!</div>
+        </div>
+        <div class="text-center"><button type="submit">Send Message</button></div>
+      </form>
+
+    </div>
+  </section><!-- End Contact Section -->
+
+  <div class="credits">
+    Designed by <a href="https://www.reewajkhanal.com.np/" class="credits-link">RK10</a>
+  </div>
+  
+
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>
