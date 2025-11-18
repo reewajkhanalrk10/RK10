@@ -1,0 +1,68 @@
+# Universal .gitignore for the RK10 portfolio project
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+
+# Node (if you add Node tooling later)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnp/
+.pnpm-debug.log
+
+# Python (if present)
+__pycache__/
+*.py[cod]
+*.pyo
+env/
+venv/
+.venv/
+ENV/
+
+# Build / distribution / temp
+dist/
+build/
+tmp/
+temp/
+.cache/
+.sass-cache/
+
+# Logs and reports
+logs/
+*.log
+coverage/
+coverage-final.json
+*.lcov
+
+# Secrets / env
+.env
+.env.*.local
+*.pem
+*.key
+*.crt
+*.cer
+
+# Misc
+.DS_Store?
+Thumbs.db
+*.bak
+*.tmp
+*.orig
+.idea/
