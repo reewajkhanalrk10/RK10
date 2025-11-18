@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReeGames Menu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #menu {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .btn {
+    padding: 20px 50px;
+    font-size: 24px;
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+
+  .btn:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff;
+    color: #ff0;
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .submenu .btn {
+    font-size: 20px;
+    background: rgba(255,255,255,0.1);
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div id="menu">
+  <div class="btn" id="startBtn" role="button">ReeGames</div>
+  <div class="submenu" id="modeMenu">
+    <a class="btn" id="2048Btn" href="ree-game1-2048.html">2048</a>
+    <a class="btn" id="ktbBtn" href="ree-game2-killthebirds.html">Kill The Birds</a>
+    <a class="btn" id="dotTouchBtn" href="ree-game3-dottouch.html">Dot Touch</a>
+    </div>
+  <!-- <div class="btn">Options</div> -->
+  <div class="btn" id="exitBtn" href="https://www.reewajkhanal.com.np">Exit</div>
+</div>
+
+<script>
+  // Particle background
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+
+  const particles = [];
+  for(let i=0;i<150;i++){
+    particles.push({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx: (Math.random()-0.5)*0.5,
+      vy: (Math.random()-0.5)*0.5,
+      size: Math.random()*3+1
+    });
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x += p.vx;
+      p.y += p.vy;
+      if(p.x<0||p.x>w) p.vx*=-1;
+      if(p.y<0||p.y>h) p.vy*=-1;
+
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+
+  // Menu interactions
+  const startBtn = document.getElementById('startBtn');
+  const modeMenu = document.getElementById('modeMenu');
+
+  startBtn.addEventListener('click', () => {
+    modeMenu.style.display = modeMenu.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+//   // Exit button — go to external site
+//   const exitBtn = document.getElementById('exitBtn');
+//   if (exitBtn) {
+//     exitBtn.addEventListener('click', () => {
+//         window.location.href = 'https://www.reewajkhanal.com.np';
+//     });
+// }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dot Touch Game</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #1e1e1e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #game-container {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    border: 3px solid #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #2e2e2e, #1a1a1a);
+  }
+
+  .dot {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #c70039);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .dot:hover {
+    transform: scale(1.2);
+  }
+
+  #score {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  #start-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    background: #ff6b6b;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  #start-btn:hover {
+    background: #c70039;
+  }
+
+  #game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    text-align: center;
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="score">Score: 0</div>
+    <button id="start-btn">Start Game</button>
+    <div id="game-over">Game Over!<br><button id="restart-btn">Restart</button></div>
+  </div>
+
+<script>
+  const container = document.getElementById('game-container');
+  const scoreDisplay = document.getElementById('score');
+  const startBtn = document.getElementById('start-btn');
+  const gameOverDisplay = document.getElementById('game-over');
+  const restartBtn = document.getElementById('restart-btn');
+
+  let score = 0;
+  let gameInterval;
+  let spawnInterval = 1500; // initial dot spawn interval
+  let dotSpeed = 2000; // initial dot life duration
+
+  function randomPosition(size) {
+    const x = Math.random() * (container.clientWidth - size);
+    const y = Math.random() * (container.clientHeight - size);
+    return { x, y };
+  }
+
+  function spawnDot() {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    const size = 40;
+    const { x, y } = randomPosition(size);
+    dot.style.left = `${x}px`;
+    dot.style.top = `${y}px`;
+    container.appendChild(dot);
+
+    // Remove dot after speed duration
+    const timeout = setTimeout(() => {
+      container.removeChild(dot);
+      endGame(); // if player misses a dot, game over
+    }, dotSpeed);
+
+    // Click event
+    dot.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      container.removeChild(dot);
+      clearTimeout(timeout);
+      increaseDifficulty();
+    });
+  }
+
+  function increaseDifficulty() {
+    if (score % 5 === 0 && spawnInterval > 400) {
+      spawnInterval -= 100; // increase spawn rate
+    }
+    if (score % 10 === 0 && dotSpeed > 800) {
+      dotSpeed -= 150; // increase difficulty
+    }
+  }
+
+  function startGame() {
+    score = 0;
+    spawnInterval = 1500;
+    dotSpeed = 2000;
+    scoreDisplay.textContent = `Score: ${score}`;
+    startBtn.style.display = 'none';
+    gameOverDisplay.style.display = 'none';
+
+    gameInterval = setInterval(spawnDot, spawnInterval);
+  }
+
+  function endGame() {
+    clearInterval(gameInterval);
+    gameOverDisplay.style.display = 'block';
+  }
+
+  startBtn.addEventListener('click', startGame);
+  restartBtn.addEventListener('click', startGame);
+</script>
+</body>
+</html>
