@@ -1,0 +1,30 @@
+{
+  "name": "rk10",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx http-server . -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reewajkhanalrk10/RK10.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reewajkhanalrk10/RK10/issues"
+  },
+  "homepage": "https://github.com/reewajkhanalrk10/RK10#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "nodemailer": "^7.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

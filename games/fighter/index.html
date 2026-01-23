@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReeGames - Keyboard Fighter</title>
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../assets/css/games.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        #hud {
+            width: 700px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .player-hud {
+            width: 45%;
+        }
+
+        .player-hud .name {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .p1-name {
+            color: #3498db;
+        }
+
+        .p2-name {
+            color: #e74c3c;
+            text-align: right;
+        }
+
+        .health-bar {
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            height: 100%;
+            transition: width 0.2s;
+        }
+
+        .p1-fill {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+
+        .p2-fill {
+            background: linear-gradient(90deg, #c0392b, #e74c3c);
+            float: right;
+        }
+
+        #gameCanvas {
+            border: 3px solid #333;
+            border-radius: 10px;
+        }
+
+        #controls {
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.65rem;
+            text-align: center;
+        }
+
+        #startBtn {
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: #9b59b6;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #startBtn:hover {
+            background: #8e44ad;
+        }
+    </style>
+</head>
+
+<body data-no-shared-navbar>
+
+    <header class="game-header" style="background: rgba(26, 26, 46, 0.95);">
+        <div class="game-title">🥊 Fighter</div>
+        <nav class="game-nav">
+            <a class="game-btn" href="../">Games Menu</a>
+            <a class="game-btn primary" href="../../">Home</a>
+        </nav>
+    </header>
+
+    <h1>Keyboard Fighter</h1>
+
+    <div id="hud">
+        <div class="player-hud">
+            <div class="name p1-name">PLAYER 1</div>
+            <div class="health-bar">
+                <div class="health-fill p1-fill" id="p1Health" style="width:100%"></div>
+            </div>
+        </div>
+        <div class="player-hud">
+            <div class="name p2-name">PLAYER 2</div>
+            <div class="health-bar">
+                <div class="health-fill p2-fill" id="p2Health" style="width:100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas" width="700" height="350"></canvas>
+    <div id="controls">P1: A/D=Move, W=Jump, S=Punch, Q=Kick • P2: ←/→=Move, ↑=Jump, ↓=Punch, /=Kick</div>
+    <button id="startBtn">FIGHT!</button>
+
+    <footer class="game-footer" style="background: rgba(26, 26, 46, 0.9);">
+        <a href="../">ReeGames</a> • 2-Player Fighting Action!
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const p1HealthBar = document.getElementById('p1Health');
+        const p2HealthBar = document.getElementById('p2Health');
+
+        const groundY = canvas.height - 50;
+
+        const fighters = {
+            p1: { x: 150, y: groundY, vy: 0, health: 100, color: '#3498db', facing: 1, state: 'idle', stateTimer: 0 },
+            p2: { x: 550, y: groundY, vy: 0, health: 100, color: '#e74c3c', facing: -1, state: 'idle', stateTimer: 0 }
+        };
+
+        const gravity = 0.8;
+        const jumpForce = -15;
+        const moveSpeed = 5;
+        const fighterWidth = 40, fighterHeight = 80;
+
+        let keys = {};
+        let gameRunning = false;
+        let animationId;
+
+        function init() {
+            fighters.p1 = { x: 150, y: groundY, vy: 0, health: 100, color: '#3498db', facing: 1, state: 'idle', stateTimer: 0 };
+            fighters.p2 = { x: 550, y: groundY, vy: 0, health: 100, color: '#e74c3c', facing: -1, state: 'idle', stateTimer: 0 };
+            updateHealth();
+        }
+
+        function updateHealth() {
+            p1HealthBar.style.width = fighters.p1.health + '%';
+            p2HealthBar.style.width = fighters.p2.health + '%';
+        }
+
+        function drawFighter(f) {
+            ctx.save();
+            ctx.translate(f.x, f.y);
+            ctx.scale(f.facing, 1);
+
+            // Body
+            ctx.fillStyle = f.color;
+            ctx.fillRect(-20, -80, 40, 60);
+
+            // Head
+            ctx.fillStyle = '#ffeaa7';
+            ctx.beginPath();
+            ctx.arc(0, -90, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Legs
+            ctx.fillStyle = '#2d3436';
+            ctx.fillRect(-15, -20, 12, 20);
+            ctx.fillRect(3, -20, 12, 20);
+
+            // Arms
+            if (f.state === 'punch') {
+                ctx.fillStyle = '#ffeaa7';
+                ctx.fillRect(20, -70, 40, 10);
+            } else if (f.state === 'kick') {
+                ctx.fillStyle = '#2d3436';
+                ctx.fillRect(15, -25, 35, 10);
+            } else {
+                ctx.fillStyle = '#ffeaa7';
+                ctx.fillRect(-25, -70, 10, 30);
+                ctx.fillRect(15, -70, 10, 30);
+            }
+
+            ctx.restore();
+        }
+
+        function draw() {
+            // Background
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Ground
+            ctx.fillStyle = '#2d3436';
+            ctx.fillRect(0, groundY, canvas.width, 50);
+
+            // Fighters
+            drawFighter(fighters.p1);
+            drawFighter(fighters.p2);
+        }
+
+        function checkHit(attacker, defender, range) {
+            const dx = (attacker.x + attacker.facing * 30) - defender.x;
+            const dy = attacker.y - defender.y;
+            return Math.abs(dx) < range && Math.abs(dy) < 60;
+        }
+
+        function update() {
+            // P1 controls
+            if (keys['KeyA']) fighters.p1.x -= moveSpeed;
+            if (keys['KeyD']) fighters.p1.x += moveSpeed;
+            if (keys['KeyW'] && fighters.p1.y >= groundY) fighters.p1.vy = jumpForce;
+
+            // P2 controls
+            if (keys['ArrowLeft']) fighters.p2.x -= moveSpeed;
+            if (keys['ArrowRight']) fighters.p2.x += moveSpeed;
+            if (keys['ArrowUp'] && fighters.p2.y >= groundY) fighters.p2.vy = jumpForce;
+
+            // Physics
+            [fighters.p1, fighters.p2].forEach(f => {
+                f.vy += gravity;
+                f.y += f.vy;
+                if (f.y > groundY) { f.y = groundY; f.vy = 0; }
+                f.x = Math.max(30, Math.min(canvas.width - 30, f.x));
+
+                // State timer
+                if (f.stateTimer > 0) {
+                    f.stateTimer--;
+                    if (f.stateTimer === 0) f.state = 'idle';
+                }
+            });
+
+            // Face each other
+            fighters.p1.facing = fighters.p1.x < fighters.p2.x ? 1 : -1;
+            fighters.p2.facing = fighters.p2.x < fighters.p1.x ? 1 : -1;
+
+            draw();
+            if (gameRunning) animationId = requestAnimationFrame(update);
+        }
+
+        function attack(attacker, defender, type) {
+            if (attacker.stateTimer > 0) return;
+
+            attacker.state = type;
+            attacker.stateTimer = 15;
+
+            const damage = type === 'punch' ? 8 : 12;
+            const range = type === 'punch' ? 50 : 60;
+
+            if (checkHit(attacker, defender, range)) {
+                defender.health -= damage;
+                defender.x += attacker.facing * 20;
+                updateHealth();
+
+                if (defender.health <= 0) {
+                    endGame(attacker === fighters.p1 ? 'Player 1' : 'Player 2');
+                }
+            }
+        }
+
+        function endGame(winner) {
+            gameRunning = false;
+            startBtn.textContent = 'REMATCH';
+            startBtn.style.display = 'block';
+            alert(winner + ' Wins!');
+        }
+
+        function startGame() {
+            init();
+            startBtn.style.display = 'none';
+            gameRunning = true;
+            update();
+        }
+
+        document.addEventListener('keydown', e => {
+            if (!keys[e.code]) {
+                keys[e.code] = true;
+                if (gameRunning) {
+                    if (e.code === 'KeyS') attack(fighters.p1, fighters.p2, 'punch');
+                    if (e.code === 'KeyQ') attack(fighters.p1, fighters.p2, 'kick');
+                    if (e.code === 'ArrowDown') attack(fighters.p2, fighters.p1, 'punch');
+                    if (e.code === 'Slash') attack(fighters.p2, fighters.p1, 'kick');
+                }
+            }
+            e.preventDefault();
+        });
+        document.addEventListener('keyup', e => { keys[e.code] = false; });
+
+        startBtn.addEventListener('click', startGame);
+        init();
+        draw();
+    </script>
+</body>
+
+</html>

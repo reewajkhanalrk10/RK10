@@ -1,5 +1,5 @@
 
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -42,65 +42,74 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
   })
 
   /**
-   * Scrool with ofset on links with a class name .scrollto
+   * Navigation Engine - REWRITTEN
    */
-  on('click', '#navbar .nav-link', function(e) {
-    let section = select(this.hash)
-    if (section) {
-      e.preventDefault()
+  document.addEventListener('click', function (e) {
+    // 1. Detect if a nav-link was clicked (even if added dynamically)
+    const navLink = e.target.closest('.nav-link');
+    if (!navLink || !navLink.hash) return;
 
-      let navbar = select('#navbar')
-      let header = select('#header')
-      let sections = select('section', true)
-      let navlinks = select('#navbar .nav-link', true)
+    const targetId = navLink.hash;
+    const targetSection = document.querySelector(targetId);
+    const header = document.querySelector('#header');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-      navlinks.forEach((item) => {
-        item.classList.remove('active')
-      })
+    // 2. Navigation Logic
+    if (targetId === '#header' || targetSection) {
+      e.preventDefault();
 
-      this.classList.add('active')
+      // Update active state in UI
+      navLinks.forEach(l => l.classList.remove('active'));
+      navLink.classList.add('active');
 
+      // Close mobile menu if open
+      const navbar = document.querySelector('#navbar');
       if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+        navbar.classList.remove('navbar-mobile');
+        const toggle = document.querySelector('.mobile-nav-toggle');
+        toggle.classList.toggle('bi-list');
+        toggle.classList.toggle('bi-x');
       }
 
-      if (this.hash == '#header') {
-        header.classList.remove('header-top')
-        sections.forEach((item) => {
-          item.classList.remove('section-show')
-        })
-        return;
-      }
-
-      if (!header.classList.contains('header-top')) {
-        header.classList.add('header-top')
-        setTimeout(function() {
-          sections.forEach((item) => {
-            item.classList.remove('section-show')
-          })
-          section.classList.add('section-show')
-
-        }, 350);
+      // Handle Home vs Sections
+      if (targetId === '#header') {
+        header.classList.remove('header-top');
+        sections.forEach(s => {
+          s.style.display = 'none';
+          s.classList.remove('section-show');
+        });
       } else {
-        sections.forEach((item) => {
-          item.classList.remove('section-show')
-        })
-        section.classList.add('section-show')
+        // Move header to top if it's not already there
+        if (!header.classList.contains('header-top')) {
+          header.classList.add('header-top');
+          setTimeout(() => {
+            showSection(targetSection, sections);
+          }, 350);
+        } else {
+          showSection(targetSection, sections);
+        }
       }
-
-      scrollto(this.hash)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, true)
+  });
+
+  // Helper function to handle section display
+  function showSection(target, allSections) {
+    allSections.forEach(s => {
+      s.style.display = 'none';
+      s.classList.remove('section-show');
+    });
+    target.style.display = 'block';
+    setTimeout(() => target.classList.add('section-show'), 50);
+  }
 
   /**
    * Activate/show sections on load with hash links
@@ -123,7 +132,7 @@
           }
         })
 
-        setTimeout(function() {
+        setTimeout(function () {
           initial_nav.classList.add('section-show')
         }, 350);
 
@@ -140,7 +149,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -191,9 +200,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');

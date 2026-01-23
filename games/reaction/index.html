@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReeGames - Reaction Test</title>
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../assets/css/games.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        #instructions {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #gameArea {
+            width: 500px;
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.1s;
+            font-size: 1.5rem;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .waiting {
+            background: #e74c3c;
+        }
+
+        .ready {
+            background: #f39c12;
+        }
+
+        .go {
+            background: #27ae60;
+        }
+
+        .result {
+            background: #3498db;
+        }
+
+        .too-early {
+            background: #9b59b6;
+        }
+
+        #results {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        #results table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        #results th,
+        #results td {
+            padding: 5px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #results th {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #restartBtn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: #9b59b6;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: none;
+        }
+
+        #restartBtn:hover {
+            background: #8e44ad;
+        }
+    </style>
+</head>
+
+<body data-no-shared-navbar style="background: linear-gradient(135deg, #2c3e50, #1a1a2e);">
+
+    <header class="game-header" style="background: rgba(0,0,0,0.8);">
+        <div class="game-title">⏱️ Reaction</div>
+        <nav class="game-nav">
+            <a class="game-btn" href="../">Games Menu</a>
+            <a class="game-btn primary" href="../../">Home</a>
+        </nav>
+    </header>
+
+    <h1>Reaction Test</h1>
+    <div id="instructions">Click when the box turns GREEN!</div>
+
+    <div id="gameArea" class="waiting">
+        Click to Start
+    </div>
+
+    <div id="results">
+        <strong>Your Attempts:</strong>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody id="attemptsList"></tbody>
+        </table>
+        <div id="average" style="margin-top:10px;"></div>
+    </div>
+
+    <button id="restartBtn">Play Again</button>
+
+    <footer class="game-footer">
+        <a href="../">ReeGames</a> • Test your reflexes!
+    </footer>
+
+    <script>
+        const gameArea = document.getElementById('gameArea');
+        const attemptsList = document.getElementById('attemptsList');
+        const averageDisplay = document.getElementById('average');
+        const restartBtn = document.getElementById('restartBtn');
+
+        let state = 'idle';
+        let startTime;
+        let timeout;
+        let attempts = [];
+
+        function setState(newState, text) {
+            state = newState;
+            gameArea.className = newState;
+            gameArea.textContent = text;
+        }
+
+        function startRound() {
+            setState('waiting', 'Wait for green...');
+
+            const delay = Math.random() * 4000 + 1500; // 1.5s to 5.5s
+            timeout = setTimeout(() => {
+                setState('go', 'CLICK NOW!');
+                startTime = Date.now();
+            }, delay);
+        }
+
+        function handleClick() {
+            if (state === 'idle' || state === 'result' || state === 'too-early') {
+                startRound();
+            } else if (state === 'waiting') {
+                clearTimeout(timeout);
+                setState('too-early', 'Too early! Click to try again');
+            } else if (state === 'go') {
+                const reactionTime = Date.now() - startTime;
+                attempts.push(reactionTime);
+
+                setState('result', `${reactionTime} ms`);
+
+                // Update table
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${attempts.length}</td><td>${reactionTime} ms</td>`;
+                attemptsList.appendChild(row);
+
+                // Calculate average
+                const avg = Math.round(attempts.reduce((a, b) => a + b, 0) / attempts.length);
+                averageDisplay.innerHTML = `<strong>Average: ${avg} ms</strong>`;
+
+                if (attempts.length >= 5) {
+                    restartBtn.style.display = 'block';
+                    gameArea.textContent += '\n\nTest complete!';
+                } else {
+                    gameArea.textContent += '\n\nClick to continue';
+                }
+            }
+        }
+
+        function restart() {
+            attempts = [];
+            attemptsList.innerHTML = '';
+            averageDisplay.innerHTML = '';
+            restartBtn.style.display = 'none';
+            setState('idle', 'Click to Start');
+        }
+
+        gameArea.addEventListener('click', handleClick);
+        restartBtn.addEventListener('click', restart);
+    </script>
+</body>
+
+</html>

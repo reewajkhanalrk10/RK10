@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReeGames</title>
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="../assets/css/games.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b2838 0%, #0d1117 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .main-container {
+      position: relative;
+      z-index: 10;
+      padding: 100px 20px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .page-title p {
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 10px;
+    }
+
+    /* Category Sections */
+    .category {
+      margin-bottom: 40px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .category-icon {
+      font-size: 2rem;
+    }
+
+    .category-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Game Cards Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .game-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #18d26e;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(24, 210, 110, 0.2);
+    }
+
+    .game-card .game-icon {
+      font-size: 3rem;
+    }
+
+    .game-card .game-name {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .game-card .game-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .game-card.coming-soon {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .game-card.coming-soon::after {
+      content: "Coming Soon";
+      font-size: 0.6rem;
+      background: #ff6b6b;
+      padding: 3px 8px;
+      border-radius: 10px;
+      margin-top: -5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-title h1 {
+        font-size: 2rem;
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body data-no-shared-navbar>
+
+  <canvas id="bg"></canvas>
+
+  <!-- Game Header -->
+  <header class="game-header">
+    <div class="game-title">🎮 ReeGames</div>
+    <nav class="game-nav">
+      <a class="game-btn primary" href="../">Home</a>
+    </nav>
+  </header>
+
+  <div class="main-container">
+    <div class="page-title">
+      <h1>ReeGames Arcade</h1>
+      <p>Choose your game and have fun!</p>
+    </div>
+
+    <!-- 1 Player Games -->
+    <section class="category">
+      <div class="category-header">
+        <span class="category-icon">🎮</span>
+        <span class="category-title">1 Player</span>
+      </div>
+      <div class="games-grid">
+        <a href="2048/" class="game-card">
+          <span class="game-icon">🔢</span>
+          <span class="game-name">2048</span>
+          <span class="game-desc">Merge tiles to reach 2048</span>
+        </a>
+        <a href="snake/" class="game-card">
+          <span class="game-icon">🐍</span>
+          <span class="game-name">Snake</span>
+          <span class="game-desc">Classic snake game</span>
+        </a>
+        <a href="memory/" class="game-card">
+          <span class="game-icon">🧠</span>
+          <span class="game-name">Memory Match</span>
+          <span class="game-desc">Find matching pairs</span>
+        </a>
+        <a href="flappy/" class="game-card">
+          <span class="game-icon">🦅</span>
+          <span class="game-name">Flappy Block</span>
+          <span class="game-desc">Dodge the obstacles</span>
+        </a>
+        <a href="dottouch/" class="game-card">
+          <span class="game-icon">🎯</span>
+          <span class="game-name">Dot Touch</span>
+          <span class="game-desc">Tap the dots fast!</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2 Player Games -->
+    <section class="category">
+      <div class="category-header">
+        <span class="category-icon">👥</span>
+        <span class="category-title">2 Players</span>
+      </div>
+      <div class="games-grid">
+        <a href="pong/" class="game-card">
+          <span class="game-icon">🏓</span>
+          <span class="game-name">Pong Battle</span>
+          <span class="game-desc">W/S vs ↑/↓</span>
+        </a>
+        <a href="tankwars/" class="game-card">
+          <span class="game-icon">🎖️</span>
+          <span class="game-name">Tank Wars</span>
+          <span class="game-desc">WASD vs Arrows</span>
+        </a>
+        <a href="fighter/" class="game-card">
+          <span class="game-icon">🥊</span>
+          <span class="game-name">Keyboard Fighter</span>
+          <span class="game-desc">A/D/W/S vs Arrows</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Quick Play -->
+    <section class="category">
+      <div class="category-header">
+        <span class="category-icon">⚡</span>
+        <span class="category-title">Quick Play</span>
+      </div>
+      <div class="games-grid">
+        <a href="killthebirds/" class="game-card">
+          <span class="game-icon">🎯</span>
+          <span class="game-name">Kill The Birds</span>
+          <span class="game-desc">Shoot 'em all!</span>
+        </a>
+        <a href="reaction/" class="game-card">
+          <span class="game-icon">⏱️</span>
+          <span class="game-name">Reaction Test</span>
+          <span class="game-desc">Test your reflexes</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Game Footer -->
+  <footer class="game-footer">
+    Powered by <a href="../">RK10</a> • <a href="../#portfolio">Back to Portfolio</a>
+  </footer>
+
+  <script>
+    // Particle background
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+
+    const particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2 + 0.5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+
+</html>

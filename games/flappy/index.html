@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReeGames - Flappy Block</title>
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../assets/css/games.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to bottom, #87CEEB 0%, #98d4ee 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        #score {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        #gameCanvas {
+            border: 3px solid #2c3e50;
+            border-radius: 10px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #b4e4f7 100%);
+        }
+
+        #controls {
+            margin-top: 15px;
+            color: #2c3e50;
+            font-size: 0.8rem;
+        }
+
+        #startBtn {
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #startBtn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .game-header {
+            background: rgba(44, 62, 80, 0.9) !important;
+        }
+    </style>
+</head>
+
+<body data-no-shared-navbar>
+
+    <header class="game-header">
+        <div class="game-title">🐦 Flappy</div>
+        <nav class="game-nav">
+            <a class="game-btn" href="../">Games Menu</a>
+            <a class="game-btn primary" href="../../">Home</a>
+        </nav>
+    </header>
+
+    <h1>Flappy Block</h1>
+    <div id="score">Score: 0</div>
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <div id="controls">Press SPACE or TAP to fly</div>
+    <button id="startBtn">Start Game</button>
+
+    <footer class="game-footer" style="background: rgba(44, 62, 80, 0.8);">
+        <a href="../">ReeGames</a> • Dodge the pipes!
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('score');
+        const startBtn = document.getElementById('startBtn');
+
+        const bird = { x: 80, y: 250, size: 25, velocity: 0, gravity: 0.5, jump: -8 };
+        const pipes = [];
+        const pipeWidth = 60;
+        const pipeGap = 150;
+
+        let score = 0;
+        let gameRunning = false;
+        let animationId;
+
+        function init() {
+            bird.y = 250;
+            bird.velocity = 0;
+            pipes.length = 0;
+            score = 0;
+            scoreDisplay.textContent = 'Score: 0';
+        }
+
+        function spawnPipe() {
+            const minHeight = 50;
+            const maxHeight = canvas.height - pipeGap - minHeight;
+            const topHeight = Math.random() * (maxHeight - minHeight) + minHeight;
+
+            pipes.push({
+                x: canvas.width,
+                topHeight: topHeight,
+                scored: false
+            });
+        }
+
+        function draw() {
+            // Sky gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#87CEEB');
+            gradient.addColorStop(1, '#b4e4f7');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Ground
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
+            ctx.fillStyle = '#228B22';
+            ctx.fillRect(0, canvas.height - 30, canvas.width, 10);
+
+            // Pipes
+            ctx.fillStyle = '#2ecc71';
+            pipes.forEach(pipe => {
+                // Top pipe
+                ctx.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
+                ctx.fillStyle = '#27ae60';
+                ctx.fillRect(pipe.x - 5, pipe.topHeight - 20, pipeWidth + 10, 20);
+
+                // Bottom pipe
+                ctx.fillStyle = '#2ecc71';
+                const bottomY = pipe.topHeight + pipeGap;
+                ctx.fillRect(pipe.x, bottomY, pipeWidth, canvas.height - bottomY - 30);
+                ctx.fillStyle = '#27ae60';
+                ctx.fillRect(pipe.x - 5, bottomY, pipeWidth + 10, 20);
+                ctx.fillStyle = '#2ecc71';
+            });
+
+            // Bird
+            ctx.fillStyle = '#f1c40f';
+            ctx.fillRect(bird.x, bird.y, bird.size, bird.size);
+            ctx.fillStyle = '#e67e22';
+            ctx.fillRect(bird.x + bird.size - 5, bird.y + 8, 10, 8);
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(bird.x + bird.size - 5, bird.y + 6, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(bird.x + bird.size - 3, bird.y + 6, 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function update() {
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            // Pipe spawning
+            if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
+                spawnPipe();
+            }
+
+            // Update pipes
+            pipes.forEach((pipe, i) => {
+                pipe.x -= 3;
+
+                // Score
+                if (!pipe.scored && pipe.x + pipeWidth < bird.x) {
+                    score++;
+                    scoreDisplay.textContent = 'Score: ' + score;
+                    pipe.scored = true;
+                }
+
+                // Collision detection
+                if (bird.x + bird.size > pipe.x && bird.x < pipe.x + pipeWidth) {
+                    if (bird.y < pipe.topHeight || bird.y + bird.size > pipe.topHeight + pipeGap) {
+                        gameOver();
+                        return;
+                    }
+                }
+            });
+
+            // Remove off-screen pipes
+            if (pipes.length && pipes[0].x + pipeWidth < 0) {
+                pipes.shift();
+            }
+
+            // Ground/ceiling collision
+            if (bird.y + bird.size > canvas.height - 30 || bird.y < 0) {
+                gameOver();
+                return;
+            }
+
+            draw();
+            animationId = requestAnimationFrame(update);
+        }
+
+        function gameOver() {
+            cancelAnimationFrame(animationId);
+            gameRunning = false;
+            startBtn.textContent = 'Play Again';
+            startBtn.style.display = 'block';
+            alert('Game Over! Score: ' + score);
+        }
+
+        function flap() {
+            if (gameRunning) {
+                bird.velocity = bird.jump;
+            }
+        }
+
+        function startGame() {
+            init();
+            startBtn.style.display = 'none';
+            gameRunning = true;
+            update();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                flap();
+            }
+        });
+
+        canvas.addEventListener('click', flap);
+        startBtn.addEventListener('click', startGame);
+
+        init();
+        draw();
+    </script>
+</body>
+
+</html>

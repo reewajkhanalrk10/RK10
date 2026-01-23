@@ -1,0 +1,495 @@
+/**
+ * ReeGames - Shared Game Styles
+ * Professional styling for all mini-games
+ */
+
+/* Reset for game pages */
+body.game-page {
+    margin: 0;
+    padding: 0 !important;
+    /* Override shared-navbar padding */
+    font-family: 'Orbitron', 'Arial', sans-serif;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* Game Viewport - Dynamically fits content between header and footer */
+.game-viewport {
+    --header-height: 60px;
+    --footer-height: 40px;
+
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: var(--footer-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+/* Ensure game canvas/container doesn't overflow */
+.game-viewport canvas,
+.game-viewport #game-container,
+.game-viewport .game-area {
+    max-width: 100%;
+    max-height: calc(100vh - var(--header-height) - var(--footer-height) - 100px);
+}
+
+/* Game Header */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.game-header .game-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.game-header .game-nav {
+    display: flex;
+    gap: 10px;
+}
+
+/* Game Navigation Buttons */
+.game-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.game-btn:hover {
+    background: #18d26e;
+    border-color: #18d26e;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(24, 210, 110, 0.4);
+}
+
+.game-btn.primary {
+    background: #18d26e;
+    border-color: #18d26e;
+}
+
+.game-btn.primary:hover {
+    background: #13a456;
+    border-color: #13a456;
+}
+
+/* Game Footer */
+.game-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 1000;
+}
+
+.game-footer a {
+    color: #18d26e;
+    text-decoration: none;
+}
+
+.game-footer a:hover {
+    color: #fff;
+}
+
+/* Enhanced Game Card Animations */
+.game-card .game-icon {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 10px rgba(24, 210, 110, 0.6));
+}
+
+.game-card .game-name {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.game-card:hover .game-name {
+    color: #18d26e;
+    text-shadow: 0 0 10px rgba(24, 210, 110, 0.4);
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(24, 210, 110, 0.1), rgba(255, 0, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.game-card:hover::before {
+    opacity: 1;
+}
+
+/* Games Menu Specific */
+.games-menu-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.games-menu-btn {
+    padding: 20px 50px;
+    font-size: 24px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.games-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff;
+    color: #ff0;
+}
+
+.games-submenu {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.games-submenu.active {
+    display: flex;
+}
+
+.games-submenu .games-menu-btn {
+    font-size: 18px;
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==============================================================
+   RESPONSIVE STYLES - Mobile First
+============================================================== */
+
+/* Touch-friendly tap targets */
+@media (pointer: coarse) {
+    .game-btn {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 24px;
+    }
+
+    .games-menu-btn {
+        min-height: 54px;
+    }
+}
+
+/* Tablet and below */
+@media (max-width: 992px) {
+    .game-header {
+        padding: 12px 15px;
+    }
+
+    .game-header .game-title {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .game-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .game-viewport {
+        padding: 10px;
+    }
+
+    .games-menu-btn {
+        padding: 15px 30px;
+        font-size: 18px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 10px 12px;
+    }
+
+    .game-header .game-title {
+        font-size: 0.9rem;
+    }
+
+    .game-header .game-nav {
+        gap: 5px;
+    }
+
+    .game-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+
+    .game-viewport {
+        margin-top: 50px;
+        margin-bottom: 35px;
+        min-height: calc(100vh - 85px);
+        padding: 5px;
+    }
+
+    .game-footer {
+        padding: 8px 15px;
+        font-size: 10px;
+    }
+
+    .games-menu-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .games-submenu .games-menu-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .game-header .game-title {
+        font-size: 0.8rem;
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .game-btn {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .games-menu-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+/* Canvas responsive sizing utility */
+.responsive-canvas {
+    max-width: 100%;
+    max-height: calc(100vh - 200px);
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Touch controls overlay for mobile games */
+.touch-controls {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    z-index: 999;
+}
+
+.touch-controls.active {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.touch-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.touch-btn:active {
+    background: rgba(24, 210, 110, 0.5);
+    transform: scale(0.95);
+}
+
+/* D-pad style touch controls */
+.touch-dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(3, 50px);
+    gap: 5px;
+}
+
+.touch-dpad .touch-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.touch-dpad .up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.touch-dpad .left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.touch-dpad .right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.touch-dpad .down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+/* Show touch controls on touch devices */
+@media (pointer: coarse) {
+    .touch-controls {
+        display: flex;
+    }
+
+    .keyboard-hint {
+        display: none;
+    }
+}
+
+/* Hide touch controls on desktop */
+@media (pointer: fine) {
+    .touch-controls {
+        display: none !important;
+    }
+}
+
+/* ===== ADDITIONAL RESPONSIVE ENHANCEMENTS ===== */
+
+/* Safe area support for games */
+.game-header {
+    padding-top: max(15px, env(safe-area-inset-top));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+}
+
+.game-footer {
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+}
+
+/* Very small screens (320px) */
+@media (max-width: 360px) {
+    .game-header .game-title {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .game-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .game-card .game-icon {
+        font-size: 2.5rem;
+    }
+
+    .game-card .game-name {
+        font-size: 0.9rem;
+    }
+
+    .game-card .game-desc {
+        font-size: 0.7rem;
+    }
+}
+
+/* Fullscreen game support */
+.game-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 10000;
+}
+
+/* Prevent pull-to-refresh on mobile games */
+.game-page {
+    overscroll-behavior: none;
+    touch-action: manipulation;
+}
+
+/* Landscape phone games */
+@media (max-height: 450px) and (orientation: landscape) {
+    .game-header {
+        padding: 8px 15px;
+    }
+
+    .game-header .game-title {
+        font-size: 0.9rem;
+    }
+
+    .game-footer {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .game-container {
+        top: 40px;
+        bottom: 25px;
+    }
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReeGames - Tank Wars</title>
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../assets/css/games.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: #2d3436;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        #scores {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .player-info {
+            text-align: center;
+        }
+
+        .player-info .health {
+            width: 100px;
+            height: 15px;
+            background: #636e72;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .player-info .health-bar {
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .p1-health {
+            background: #3498db;
+        }
+
+        .p2-health {
+            background: #e74c3c;
+        }
+
+        .player-info small {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #gameCanvas {
+            border: 3px solid #636e72;
+            border-radius: 10px;
+            background: #1e272e;
+        }
+
+        #controls {
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        #startBtn {
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: #00b894;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #startBtn:hover {
+            background: #00a383;
+        }
+    </style>
+</head>
+
+<body data-no-shared-navbar>
+
+    <header class="game-header" style="background: rgba(45, 52, 54, 0.95);">
+        <div class="game-title">🎖️ Tank Wars</div>
+        <nav class="game-nav">
+            <a class="game-btn" href="../">Games Menu</a>
+            <a class="game-btn primary" href="../../">Home</a>
+        </nav>
+    </header>
+
+    <h1>Tank Wars</h1>
+    <div id="scores">
+        <div class="player-info">
+            <small>P1: WASD + Space</small>
+            <div class="health">
+                <div class="health-bar p1-health" id="p1Health" style="width:100%"></div>
+            </div>
+        </div>
+        <div class="player-info">
+            <small>P2: Arrows + Enter</small>
+            <div class="health">
+                <div class="health-bar p2-health" id="p2Health" style="width:100%"></div>
+            </div>
+        </div>
+    </div>
+    <canvas id="gameCanvas" width="700" height="500"></canvas>
+    <div id="controls">Move with WASD/Arrows • Shoot with Space/Enter • Last tank standing wins!</div>
+    <button id="startBtn">Start Battle</button>
+
+    <footer class="game-footer" style="background: rgba(45, 52, 54, 0.9);">
+        <a href="../">ReeGames</a> • 2-Player Tank Battle!
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const p1HealthBar = document.getElementById('p1Health');
+        const p2HealthBar = document.getElementById('p2Health');
+
+        const tanks = {
+            p1: { x: 100, y: 250, angle: 0, health: 100, color: '#3498db', bullets: [] },
+            p2: { x: 600, y: 250, angle: Math.PI, health: 100, color: '#e74c3c', bullets: [] }
+        };
+
+        const obstacles = [
+            { x: 300, y: 100, w: 100, h: 30 },
+            { x: 300, y: 370, w: 100, h: 30 },
+            { x: 200, y: 230, w: 30, h: 100 },
+            { x: 470, y: 200, w: 30, h: 100 }
+        ];
+
+        let keys = {};
+        let gameRunning = false;
+        let animationId;
+
+        function init() {
+            tanks.p1 = { x: 100, y: 250, angle: 0, health: 100, color: '#3498db', bullets: [] };
+            tanks.p2 = { x: 600, y: 250, angle: Math.PI, health: 100, color: '#e74c3c', bullets: [] };
+            updateHealth();
+        }
+
+        function updateHealth() {
+            p1HealthBar.style.width = tanks.p1.health + '%';
+            p2HealthBar.style.width = tanks.p2.health + '%';
+        }
+
+        function shoot(tank) {
+            tank.bullets.push({
+                x: tank.x + Math.cos(tank.angle) * 25,
+                y: tank.y + Math.sin(tank.angle) * 25,
+                vx: Math.cos(tank.angle) * 8,
+                vy: Math.sin(tank.angle) * 8
+            });
+        }
+
+        function drawTank(tank) {
+            ctx.save();
+            ctx.translate(tank.x, tank.y);
+            ctx.rotate(tank.angle);
+
+            // Body
+            ctx.fillStyle = tank.color;
+            ctx.fillRect(-20, -15, 40, 30);
+
+            // Turret
+            ctx.fillStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(0, 0, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Barrel
+            ctx.fillStyle = '#555';
+            ctx.fillRect(0, -4, 25, 8);
+
+            ctx.restore();
+        }
+
+        function draw() {
+            ctx.fillStyle = '#1e272e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Obstacles
+            ctx.fillStyle = '#636e72';
+            obstacles.forEach(o => ctx.fillRect(o.x, o.y, o.w, o.h));
+
+            // Tanks
+            drawTank(tanks.p1);
+            drawTank(tanks.p2);
+
+            // Bullets
+            ctx.fillStyle = '#f1c40f';
+            [...tanks.p1.bullets, ...tanks.p2.bullets].forEach(b => {
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function update() {
+            // P1 movement
+            if (keys['KeyW']) { tanks.p1.x += Math.cos(tanks.p1.angle) * 3; tanks.p1.y += Math.sin(tanks.p1.angle) * 3; }
+            if (keys['KeyS']) { tanks.p1.x -= Math.cos(tanks.p1.angle) * 2; tanks.p1.y -= Math.sin(tanks.p1.angle) * 2; }
+            if (keys['KeyA']) tanks.p1.angle -= 0.05;
+            if (keys['KeyD']) tanks.p1.angle += 0.05;
+
+            // P2 movement
+            if (keys['ArrowUp']) { tanks.p2.x += Math.cos(tanks.p2.angle) * 3; tanks.p2.y += Math.sin(tanks.p2.angle) * 3; }
+            if (keys['ArrowDown']) { tanks.p2.x -= Math.cos(tanks.p2.angle) * 2; tanks.p2.y -= Math.sin(tanks.p2.angle) * 2; }
+            if (keys['ArrowLeft']) tanks.p2.angle -= 0.05;
+            if (keys['ArrowRight']) tanks.p2.angle += 0.05;
+
+            // Keep in bounds
+            tanks.p1.x = Math.max(25, Math.min(canvas.width - 25, tanks.p1.x));
+            tanks.p1.y = Math.max(25, Math.min(canvas.height - 25, tanks.p1.y));
+            tanks.p2.x = Math.max(25, Math.min(canvas.width - 25, tanks.p2.x));
+            tanks.p2.y = Math.max(25, Math.min(canvas.height - 25, tanks.p2.y));
+
+            // Update bullets
+            [tanks.p1, tanks.p2].forEach((tank, i) => {
+                const enemy = i === 0 ? tanks.p2 : tanks.p1;
+                tank.bullets = tank.bullets.filter(b => {
+                    b.x += b.vx;
+                    b.y += b.vy;
+
+                    // Out of bounds
+                    if (b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height) return false;
+
+                    // Hit obstacle
+                    for (let o of obstacles) {
+                        if (b.x > o.x && b.x < o.x + o.w && b.y > o.y && b.y < o.y + o.h) return false;
+                    }
+
+                    // Hit enemy
+                    const dx = b.x - enemy.x, dy = b.y - enemy.y;
+                    if (Math.sqrt(dx * dx + dy * dy) < 20) {
+                        enemy.health -= 10;
+                        updateHealth();
+                        if (enemy.health <= 0) endGame(i === 0 ? 'Player 1' : 'Player 2');
+                        return false;
+                    }
+
+                    return true;
+                });
+            });
+
+            draw();
+            if (gameRunning) animationId = requestAnimationFrame(update);
+        }
+
+        function endGame(winner) {
+            gameRunning = false;
+            startBtn.textContent = 'Play Again';
+            startBtn.style.display = 'block';
+            alert(winner + ' Wins!');
+        }
+
+        function startGame() {
+            init();
+            startBtn.style.display = 'none';
+            gameRunning = true;
+            update();
+        }
+
+        document.addEventListener('keydown', e => {
+            keys[e.code] = true;
+            if (e.code === 'Space' && gameRunning) { shoot(tanks.p1); e.preventDefault(); }
+            if (e.code === 'Enter' && gameRunning) { shoot(tanks.p2); e.preventDefault(); }
+        });
+        document.addEventListener('keyup', e => { keys[e.code] = false; });
+
+        startBtn.addEventListener('click', startGame);
+        init();
+        draw();
+    </script>
+</body>
+
+</html>
