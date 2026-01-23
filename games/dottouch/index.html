@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReeGames - Dot Touch</title>
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="../../assets/css/games.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #1e1e1e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #game-container {
+      position: relative;
+      width: 90vw;
+      height: 80vh;
+      margin-top: 60px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #2e2e2e, #1a1a1a);
+    }
+
+    .dot {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ff6b6b, #c70039);
+      cursor: pointer;
+      transition: transform 0.2s;
+      animation: pulse 0.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    .dot:hover {
+      transform: scale(1.3);
+    }
+
+    #score {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #18d26e;
+    }
+
+    #start-btn,
+    #restart-btn {
+      padding: 15px 30px;
+      font-size: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      border: none;
+      border-radius: 50px;
+      background: #18d26e;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+
+    #start-btn:hover,
+    #restart-btn:hover {
+      background: #13a456;
+      transform: scale(1.05);
+    }
+
+    #start-btn {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      text-align: center;
+      display: none;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+    }
+
+    #game-over p {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body data-no-shared-navbar>
+
+  <!-- Game Header -->
+  <header class="game-header">
+    <div class="game-title">Dot Touch</div>
+    <nav class="game-nav">
+      <a class="game-btn" href="../">Games Menu</a>
+      <a class="game-btn primary" href="../../">Home</a>
+    </nav>
+  </header>
+
+  <div id="game-container">
+    <div id="score">Score: 0</div>
+    <button id="start-btn">Start Game</button>
+    <div id="game-over">
+      <p>Game Over!</p>
+      <button id="restart-btn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Game Footer -->
+  <footer class="game-footer">
+    <a href="../">ReeGames</a> • Click the dots before they disappear!
+  </footer>
+
+  <script>
+    const container = document.getElementById('game-container');
+    const scoreDisplay = document.getElementById('score');
+    const startBtn = document.getElementById('start-btn');
+    const gameOverDisplay = document.getElementById('game-over');
+    const restartBtn = document.getElementById('restart-btn');
+
+    let score = 0;
+    let gameInterval;
+    let spawnInterval = 1500;
+    let dotSpeed = 2000;
+
+    function randomPosition(size) {
+      const x = Math.random() * (container.clientWidth - size - 20) + 10;
+      const y = Math.random() * (container.clientHeight - size - 100) + 60;
+      return { x, y };
+    }
+
+    function spawnDot() {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      const size = 40;
+      const { x, y } = randomPosition(size);
+      dot.style.left = `${x}px`;
+      dot.style.top = `${y}px`;
+      container.appendChild(dot);
+
+      const timeout = setTimeout(() => {
+        if (container.contains(dot)) {
+          container.removeChild(dot);
+          endGame();
+        }
+      }, dotSpeed);
+
+      dot.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = `Score: ${score}`;
+        container.removeChild(dot);
+        clearTimeout(timeout);
+        increaseDifficulty();
+      });
+    }
+
+    function increaseDifficulty() {
+      if (score % 5 === 0 && spawnInterval > 400) {
+        spawnInterval -= 100;
+        clearInterval(gameInterval);
+        gameInterval = setInterval(spawnDot, spawnInterval);
+      }
+      if (score % 10 === 0 && dotSpeed > 800) {
+        dotSpeed -= 150;
+      }
+    }
+
+    function startGame() {
+      score = 0;
+      spawnInterval = 1500;
+      dotSpeed = 2000;
+      scoreDisplay.textContent = `Score: ${score}`;
+      startBtn.style.display = 'none';
+      gameOverDisplay.style.display = 'none';
+
+      // Clear existing dots
+      document.querySelectorAll('.dot').forEach(d => d.remove());
+
+      gameInterval = setInterval(spawnDot, spawnInterval);
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      gameOverDisplay.style.display = 'block';
+    }
+
+    startBtn.addEventListener('click', startGame);
+    restartBtn.addEventListener('click', startGame);
+  </script>
+
+</body>
+
+</html>

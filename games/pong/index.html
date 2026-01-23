@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReeGames - Pong Battle</title>
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../assets/css/games.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        #scores {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 50px;
+        }
+
+        .player-score {
+            text-align: center;
+        }
+
+        .player-score small {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #gameCanvas {
+            border: 3px solid #fff;
+            border-radius: 10px;
+        }
+
+        #controls {
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        #startBtn {
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #startBtn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .game-header {
+            background: rgba(0, 0, 0, 0.9) !important;
+        }
+    </style>
+</head>
+
+<body data-no-shared-navbar>
+
+    <header class="game-header">
+        <div class="game-title">🏓 Pong</div>
+        <nav class="game-nav">
+            <a class="game-btn" href="../">Games Menu</a>
+            <a class="game-btn primary" href="../../">Home</a>
+        </nav>
+    </header>
+
+    <h1>Pong Battle</h1>
+    <div id="scores">
+        <div class="player-score">
+            <div id="p1Score">0</div>
+            <small>Player 1 (W/S)</small>
+        </div>
+        <div class="player-score">
+            <div id="p2Score">0</div>
+            <small>Player 2 (↑/↓)</small>
+        </div>
+    </div>
+    <canvas id="gameCanvas" width="700" height="400"></canvas>
+    <div id="controls">Player 1: W/S • Player 2: ↑/↓ • First to 5 wins!</div>
+    <button id="startBtn">Start Game</button>
+
+    <footer class="game-footer">
+        <a href="../">ReeGames</a> • Classic 2-Player Pong!
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const p1ScoreDisplay = document.getElementById('p1Score');
+        const p2ScoreDisplay = document.getElementById('p2Score');
+
+        const paddleHeight = 80, paddleWidth = 12;
+        const ballSize = 12;
+
+        let p1 = { y: canvas.height / 2 - paddleHeight / 2, score: 0 };
+        let p2 = { y: canvas.height / 2 - paddleHeight / 2, score: 0 };
+        let ball = { x: canvas.width / 2, y: canvas.height / 2, vx: 5, vy: 3 };
+
+        let keys = {};
+        let gameRunning = false;
+        let animationId;
+
+        function init() {
+            p1.y = p2.y = canvas.height / 2 - paddleHeight / 2;
+            p1.score = p2.score = 0;
+            resetBall();
+            updateScores();
+        }
+
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.vx = (Math.random() > 0.5 ? 1 : -1) * 5;
+            ball.vy = (Math.random() - 0.5) * 6;
+        }
+
+        function updateScores() {
+            p1ScoreDisplay.textContent = p1.score;
+            p2ScoreDisplay.textContent = p2.score;
+        }
+
+        function draw() {
+            // Clear
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Center line
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.setLineDash([10, 10]);
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Paddles
+            ctx.fillStyle = '#3498db';
+            ctx.fillRect(20, p1.y, paddleWidth, paddleHeight);
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillRect(canvas.width - 20 - paddleWidth, p2.y, paddleWidth, paddleHeight);
+
+            // Ball
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ballSize, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function update() {
+            // Paddle movement
+            if (keys['KeyW'] && p1.y > 0) p1.y -= 7;
+            if (keys['KeyS'] && p1.y < canvas.height - paddleHeight) p1.y += 7;
+            if (keys['ArrowUp'] && p2.y > 0) p2.y -= 7;
+            if (keys['ArrowDown'] && p2.y < canvas.height - paddleHeight) p2.y += 7;
+
+            // Ball movement
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+
+            // Top/bottom collision
+            if (ball.y - ballSize < 0 || ball.y + ballSize > canvas.height) {
+                ball.vy *= -1;
+            }
+
+            // Paddle collision
+            if (ball.x - ballSize < 32 && ball.y > p1.y && ball.y < p1.y + paddleHeight) {
+                ball.vx = Math.abs(ball.vx) * 1.05;
+                ball.vy += (ball.y - (p1.y + paddleHeight / 2)) * 0.1;
+            }
+            if (ball.x + ballSize > canvas.width - 32 && ball.y > p2.y && ball.y < p2.y + paddleHeight) {
+                ball.vx = -Math.abs(ball.vx) * 1.05;
+                ball.vy += (ball.y - (p2.y + paddleHeight / 2)) * 0.1;
+            }
+
+            // Scoring
+            if (ball.x < 0) {
+                p2.score++;
+                updateScores();
+                if (p2.score >= 5) { endGame('Player 2'); return; }
+                resetBall();
+            }
+            if (ball.x > canvas.width) {
+                p1.score++;
+                updateScores();
+                if (p1.score >= 5) { endGame('Player 1'); return; }
+                resetBall();
+            }
+
+            draw();
+            animationId = requestAnimationFrame(update);
+        }
+
+        function endGame(winner) {
+            cancelAnimationFrame(animationId);
+            gameRunning = false;
+            startBtn.textContent = 'Play Again';
+            startBtn.style.display = 'block';
+            alert(winner + ' Wins!');
+        }
+
+        function startGame() {
+            init();
+            startBtn.style.display = 'none';
+            gameRunning = true;
+            update();
+        }
+
+        document.addEventListener('keydown', e => { keys[e.code] = true; e.preventDefault(); });
+        document.addEventListener('keyup', e => { keys[e.code] = false; });
+
+        startBtn.addEventListener('click', startGame);
+        init();
+        draw();
+    </script>
+</body>
+
+</html>

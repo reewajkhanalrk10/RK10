@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReeGames - Memory Match</title>
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../assets/css/games.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 90px;
+            padding-bottom: 70px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        #stats {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 10px;
+            perspective: 1000px;
+        }
+
+        .card {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card.matched {
+            pointer-events: none;
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card-front::after {
+            content: "?";
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 2rem;
+        }
+
+        .card-back {
+            background: #fff;
+            transform: rotateY(180deg);
+        }
+
+        .card.matched .card-back {
+            background: #4ecca3;
+        }
+
+        #restartBtn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: #fff;
+            color: #764ba2;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #restartBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #winMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+        }
+
+        #winMessage h2 {
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+
+<body data-no-shared-navbar>
+
+    <header class="game-header" style="background: rgba(102, 126, 234, 0.9);">
+        <div class="game-title">🧠 Memory</div>
+        <nav class="game-nav">
+            <a class="game-btn" href="../">Games Menu</a>
+            <a class="game-btn primary" href="../../">Home</a>
+        </nav>
+    </header>
+
+    <h1>Memory Match</h1>
+    <div id="stats">
+        <span>Moves: <strong id="moves">0</strong></span>
+        <span>Pairs: <strong id="pairs">0</strong>/8</span>
+    </div>
+
+    <div id="gameBoard"></div>
+
+    <div id="winMessage">
+        <h2>🎉 You Won!</h2>
+        <p>Completed in <span id="finalMoves">0</span> moves</p>
+    </div>
+
+    <button id="restartBtn">Restart</button>
+
+    <footer class="game-footer" style="background: rgba(102, 126, 234, 0.8);">
+        <a href="../">ReeGames</a> • Find all matching pairs!
+    </footer>
+
+    <script>
+        const emojis = ['🎮', '🎲', '🎯', '🏆', '⭐', '🔥', '💎', '🚀'];
+        const board = document.getElementById('gameBoard');
+        const movesDisplay = document.getElementById('moves');
+        const pairsDisplay = document.getElementById('pairs');
+        const winMessage = document.getElementById('winMessage');
+        const finalMovesDisplay = document.getElementById('finalMoves');
+        const restartBtn = document.getElementById('restartBtn');
+
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let canFlip = true;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createBoard() {
+            board.innerHTML = '';
+            cards = shuffle([...emojis, ...emojis]);
+            matchedPairs = 0;
+            moves = 0;
+            flippedCards = [];
+            canFlip = true;
+
+            movesDisplay.textContent = '0';
+            pairsDisplay.textContent = '0';
+            winMessage.style.display = 'none';
+
+            cards.forEach((emoji, i) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = i;
+                card.innerHTML = `
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back">${emoji}</div>
+        `;
+                card.addEventListener('click', () => flipCard(card, emoji));
+                board.appendChild(card);
+            });
+        }
+
+        function flipCard(card, emoji) {
+            if (!canFlip || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+
+            card.classList.add('flipped');
+            flippedCards.push({ card, emoji });
+
+            if (flippedCards.length === 2) {
+                moves++;
+                movesDisplay.textContent = moves;
+                canFlip = false;
+
+                const [first, second] = flippedCards;
+
+                if (first.emoji === second.emoji) {
+                    first.card.classList.add('matched');
+                    second.card.classList.add('matched');
+                    matchedPairs++;
+                    pairsDisplay.textContent = matchedPairs;
+                    flippedCards = [];
+                    canFlip = true;
+
+                    if (matchedPairs === 8) {
+                        winMessage.style.display = 'block';
+                        finalMovesDisplay.textContent = moves;
+                    }
+                } else {
+                    setTimeout(() => {
+                        first.card.classList.remove('flipped');
+                        second.card.classList.remove('flipped');
+                        flippedCards = [];
+                        canFlip = true;
+                    }, 1000);
+                }
+            }
+        }
+
+        restartBtn.addEventListener('click', createBoard);
+        createBoard();
+    </script>
+</body>
+
+</html>

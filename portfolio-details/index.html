@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Portfolio Details - RK10</title>
+  <meta content="Portfolio project details" name="description">
+  <meta content="portfolio, project, RK10" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #18d26e;
+      --bg-dark: #0d1117;
+      --bg-card: #161b22;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Main Content */
+    .portfolio-details-page {
+      padding: 100px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Project Header */
+    .project-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .project-header .category-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-color), #13a456);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .project-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+      background: linear-gradient(135deg, #fff, var(--primary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .project-header .project-date {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 40px;
+    }
+
+    @media (max-width: 992px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Image Slider */
+    .image-section {
+      background: var(--bg-card);
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .portfolio-details-slider {
+      height: 400px;
+    }
+
+    .portfolio-details-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary-color);
+    }
+
+    /* Info Card */
+    .info-card {
+      background: var(--bg-card);
+      border-radius: 15px;
+      padding: 30px;
+      border: 1px solid var(--border-color);
+      height: fit-content;
+    }
+
+    .info-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-card h3 i {
+      font-size: 1.5rem;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px;
+    }
+
+    .info-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    .info-list li strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 30px;
+      background: var(--primary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-back:hover {
+      background: transparent;
+      color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(24, 210, 110, 0.3);
+    }
+
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 30px;
+      background: transparent;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid var(--border-color);
+    }
+
+    .btn-home:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Footer Credits */
+    .page-footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 40px;
+    }
+
+    .page-footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .page-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 60px;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Not Found State */
+    .not-found {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .not-found h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .not-found p {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .portfolio-details-slider {
+        height: 250px;
+      }
+
+      .info-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main id="main">
+    <div class="portfolio-details-page">
+
+      <!-- Project Header -->
+      <div class="project-header">
+        <span class="category-badge" id="project-category">Loading...</span>
+        <h1 class="portfolio-title">Loading project...</h1>
+        <div class="project-date" id="project-date"></div>
+      </div>
+
+      <!-- Content Grid -->
+      <div class="content-grid">
+
+        <!-- Image Slider -->
+        <div class="image-section">
+          <div class="portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+              <!-- Dynamic Images will be injected here -->
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <!-- Info Card -->
+        <div class="info-card">
+          <h3><i class="bi bi-info-circle"></i> Project Details</h3>
+
+          <ul class="info-list">
+            <li>
+              <strong>Category</strong>
+              <span id="info-category">-</span>
+            </li>
+            <li>
+              <strong>Year</strong>
+              <span id="info-date">-</span>
+            </li>
+            <li>
+              <strong>Status</strong>
+              <span>Completed</span>
+            </li>
+          </ul>
+
+          <p class="project-description" id="project-desc">
+            <!-- Description will be injected here -->
+          </p>
+
+          <div class="action-buttons">
+            <a href="../" class="btn-back"
+              onclick="if(document.referrer && document.referrer.includes(location.host)){event.preventDefault();history.back();}">
+              <i class="bi bi-arrow-left"></i> Go Back
+            </a>
+            <a href="../#portfolio" class="btn-home">
+              <i class="bi bi-grid"></i> All Projects
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="page-footer">
+        <a href="../">RK10</a> • Portfolio & Projects
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Portfolio Data -->
+  <script src="../assets/js/portfolio-data.js"></script>
+
+  <!-- UI Components -->
+  <script src="../assets/js/nav-component.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const projectId = params.get('id');
+
+      if (projectId && portfolioData[projectId]) {
+        const project = portfolioData[projectId];
+
+        // Update header
+        document.querySelector('.portfolio-title').textContent = project.title;
+        document.getElementById('project-category').textContent = project.category;
+        document.getElementById('project-date').textContent = project.date;
+
+        // Update info card
+        document.getElementById('info-category').textContent = project.category;
+        document.getElementById('info-date').textContent = project.date;
+        document.getElementById('project-desc').textContent = project.description;
+
+        // Update page title
+        document.title = `${project.title} - RK10 Portfolio`;
+
+        // Inject Images - now uses single 'image' field
+        const swiperWrapper = document.querySelector('.swiper-wrapper');
+        const imgSrc = '../' + project.image; // Prepend relative path
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `<img src="${imgSrc}" alt="${project.title}">`;
+        swiperWrapper.appendChild(slide);
+
+        // Initialize Swiper
+        new Swiper('.portfolio-details-slider', {
+          speed: 400,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+          }
+        });
+      } else {
+        // Project not found
+        document.querySelector('.portfolio-details-page').innerHTML = `
+          <div class="not-found">
+            <h2>🔍 Project Not Found</h2>
+            <p>The project you're looking for doesn't exist or may have been removed.</p>
+            <a href="../" class="btn-back"><i class="bi bi-house"></i> Go Home</a>
+          </div>
+        `;
+      }
+    });
+  </script>
+
+  <!-- Three.js for 3D Page Transitions -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script>window.rootPath = "../";</script>
+  <script src="../assets/js/transition-3d.js"></script>
+
+</body>
+
+</html>
