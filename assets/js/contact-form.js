@@ -49,7 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
             from_email: form.querySelector('#email').value,
             subject: form.querySelector('#subject').value,
             message: form.querySelector('textarea[name="message"]').value,
-            to_name: siteConfig.owner.name
+            to_name: siteConfig.owner.name,
+            to_email: siteConfig.owner.email,
+            email: 'reeisworking247@gmail.com'  // Matches {{email}} in your template
         };
 
         // Send email via EmailJS
@@ -71,7 +73,16 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(function (error) {
                 loading.style.display = 'none';
-                errorMsg.textContent = 'Failed to send message. Please try again or email directly.';
+                // Show detailed error for debugging
+                let errorText = 'Failed to send message. ';
+                if (error.text) {
+                    errorText += 'Error: ' + error.text;
+                } else if (error.message) {
+                    errorText += 'Error: ' + error.message;
+                } else {
+                    errorText += 'Please check your EmailJS configuration.';
+                }
+                errorMsg.textContent = errorText;
                 errorMsg.style.display = 'block';
                 submitBtn.disabled = false;
                 console.error('EmailJS Error:', error);

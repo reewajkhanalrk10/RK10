@@ -1,10 +1,10 @@
+/**
+ * Page Transition Loader - DISABLED
+ * This functionality has been moved to transition-3d.js with the new sci-fi design
+ */
 document.addEventListener("DOMContentLoaded", function () {
-    // Skip page transition on game pages
-    if (document.body.hasAttribute('data-no-shared-navbar')) {
-        return;
-    }
-
-    const rootPath = window.rootPath || "../";
+    // DISABLED: Using transition-3d.js instead
+    return;
 
     // 1. Inject Loader HTML
     const loaderHTML = `
@@ -19,11 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const loader = document.getElementById('page-loader');
 
-    // 2. Fade Out on Load
-    // Use a small timeout to ensure the logo is seen (branding buffer)
+    // 2. Fade Out on Load - Faster with optimized images
     setTimeout(() => {
         loader.classList.add('hidden');
-    }, 800);
+    }, 300);
 
     // 3. Intercept Links for "Fade In" Transition
     const links = document.querySelectorAll('a');
