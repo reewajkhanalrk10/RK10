@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (portfolioContainer && typeof Isotope !== 'undefined') {
             const iso = new Isotope(portfolioContainer, {
                 itemSelector: '.portfolio-item',
-                layoutMode: 'fitRows'
+                layoutMode: 'fitRows',
+                percentPosition: true
             });
 
             // Filter items on button click
@@ -72,20 +73,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
 
-            // Trigger layout after images load
+            // Progressive layout - don't wait for all images
+            // Relayout after each image loads for smooth progressive display
             const images = portfolioContainer.querySelectorAll('img');
-            let loadedCount = 0;
             images.forEach(img => {
-                if (img.complete) {
-                    loadedCount++;
-                    if (loadedCount === images.length) iso.layout();
-                } else {
+                if (!img.complete) {
                     img.addEventListener('load', () => {
-                        loadedCount++;
-                        if (loadedCount === images.length) iso.layout();
+                        iso.layout();
+                    });
+                    img.addEventListener('error', () => {
+                        iso.layout();
                     });
                 }
             });
+
+            // Initial layout
+            iso.layout();
         }
-    }, 100);
+    }, 50);
 });
