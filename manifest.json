@@ -1,0 +1,25 @@
+{
+    "name": "Reewaj Khanal - Portfolio",
+    "short_name": "RK10",
+    "description": "Portfolio of Reewaj Khanal - Full-Stack Developer, Researcher & Designer from Nepal",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#121212",
+    "theme_color": "#00ffff",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "assets/img/webpagekologo.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "portfolio",
+        "developer",
+        "technology"
+    ],
+    "lang": "en",
+    "dir": "ltr"
+}
