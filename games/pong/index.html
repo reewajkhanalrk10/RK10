@@ -236,6 +236,33 @@
         document.addEventListener('keyup', e => { keys[e.code] = false; });
 
         startBtn.addEventListener('click', startGame);
+
+        // Mobile touch controls - tap left/right side of screen to move paddles
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            const halfHeight = rect.height / 2;
+
+            // Left side of canvas controls P1, right side controls P2
+            if (x < rect.width / 2) {
+                if (y < halfHeight) keys['KeyW'] = true;
+                else keys['KeyS'] = true;
+            } else {
+                if (y < halfHeight) keys['ArrowUp'] = true;
+                else keys['ArrowDown'] = true;
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            keys['KeyW'] = false;
+            keys['KeyS'] = false;
+            keys['ArrowUp'] = false;
+            keys['ArrowDown'] = false;
+        });
+
         init();
         draw();
     </script>
