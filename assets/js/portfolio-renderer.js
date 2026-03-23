@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     });
 
+    // SECURITY NOTE: innerHTML is used here with data from a local static JS file (portfolio-data.js).
+    // This is safe because the data is trusted and never comes from user input or external APIs.
+    // If this data source ever changes to an API or user input, switch to DOM manipulation
+    // or sanitize the HTML to prevent XSS attacks.
     container.innerHTML = html;
 
     // Add click handlers to open modal

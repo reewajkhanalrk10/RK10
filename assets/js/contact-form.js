@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             message: form.querySelector('textarea[name="message"]').value,
             to_name: siteConfig.owner.name,
             to_email: siteConfig.owner.email,
-            email: 'reeisworking247@gmail.com'  // Matches {{email}} in your template
+            email: siteConfig.owner.email  // Uses centralized config instead of hardcoded value
         };
 
         // Send email via EmailJS
